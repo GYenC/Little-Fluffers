@@ -1,0 +1,267 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit pet entries
+{% endblock %}
+
+<p>{% block main %}
+{% if error %}
+{{ error }}
+{% endif %}
+{% if success %}
+{{ success }}
+{% endif %}</p>
+<h1>Edit a pet entry</h1>
+{% for rows in pet %}
+
+
+
+<hr>
+<table class="master">
+    <tr>
+        <td rowspan="12" class="pic"style="text-align:center;">
+            {% if rows.pic %}
+            <img src={{rows.picpath}}{{rows.pic}} width="240px" class="center">
+            {% else %}
+            <div class="overlay-c">
+                <img src="/static/stock/nopic.jpg"  width="240px" class="center">
+                <div class="overlayt">No photo uploaded</div>
+              </div>
+            {% endif %}
+            <label class="file-upload">
+                <div style="margin-left: auto; margin-right: auto;" class="input-group">
+                    <form action="/upload" class="center" method=post enctype=multipart/form-data>
+                    <input type=file name=file style="float:left"><input type="hidden" value="{{ rows.id }}" name="edit"><input type=submit  style="float: right" value=Upload></form>
+                </div>
+                </label>
+            
+        </td>
+        <form action="/editsub" method="Post">
+        <tr>
+            
+                
+            <th>Pet name: </th>
+            <td><div class="form-pet">
+                <input autocomplete="off" autofocus class="control-pet" name="name" placeholder="Pet name" type="text" value = "{{rows.name}}">
+            </div></td>
+            <td rowspan="12"><div class="id">
+                <input type="hidden" value="{{ rows.id }}" name="edit">
+            <button class="button" type="submit">Update entry</button>
+                </div></td>
+        </tr>
+        <tr>
+            <th>Species: </th>
+            <td><div class="form-pet">
+                <input class="control-pet" name="species" placeholder="Species" type="text" value="{{ rows.species }}">
+            </div></td>
+        </tr>
+        <tr>
+            <th>Sex: </th>
+            <td><div class="form-pet">
+                <input class="control-pet" name="sex" placeholder="Sex" type="text" value="{{ rows.sex }}">
+            </div></td>
+        </tr>
+        <tr>
+            <th>Birthdate: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="birthdate" placeholder="Date of birth" type="date" value="{{ rows.birthdate }}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Unique traits:</th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="traits" placeholder="Unique identifying traits" type="text" value="{{ rows.traits }}">
+                </div>    
+            </td>
+        </tr>
+        <tr>
+            <th>Food: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="food" placeholder="Food" type="text" value="{{ rows.food }}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Feeding frequency: </th>
+            <td>
+                <select id="feed_freq" name="feed_freq">
+                    <option value="Daily" {% if rows.feed_freq == "Daily" %}{{"selected"}}{% endif %}>Daily</option>
+                    <option value="Every week" {% if rows.feed_freq == "Every week" %}{{"selected"}}{% endif %}>Every week</option>
+                    <option value="Every 2 weeks" {% if rows.feed_freq == "Every 2 weeks" %}{{"selected"}}{% endif %}>Every 2 weeks</option>
+                    <option value="Every 3 week" {% if rows.feed_freq == "Every 3 weeks" %}{{"selected"}}{% endif %}>Every 3 weeks</option>
+                    <option value="Every 4 weeks" {% if rows.feed_freq == "Every 4 weeks" %}{{"selected"}}{% endif %}>Every 4 weeks</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Vet: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="vet" placeholder="Vet practice" type="text" value="{{rows.vet}}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Vet contact number: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="vet_num" placeholder="Phone number for vet" type="text" value="{{rows.vet_num}}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Environment parameters: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="env" placeholder="Environment parameters" type="text" value="{{rows.env}}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+             
+            <th>Notes: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="notes" placeholder="Notes" type="text" value="{{rows.notes}}">
+                </div>
+            </td>
+        </tr>
+       
+        <tr>
+            
+        </tr>
+        
+  </form>
+
+</table>
+
+    <br>
+    <!-- medical -->
+<h3>Medical</h3>
+<table class="med">
+    
+    <tr>
+        <th>Date of entry</th>
+        <th>Pet weight (kg)</th>
+        <th>On medication</th>
+        <th>Medication</th>
+        <th>Dosage</th>
+        <th>Start of treatment</th>
+        <th>End of treatment</th>
+        <th>Notes</th>
+    </tr>
+    {% for meds in med %}
+    {% if meds.pet_id == rows.id %}
+    <tr>
+        <form action="/updatemed" method="Post" class="formt">
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="dateentry" placeholder="Date of entry" value="{{meds.dateentry}}" type="date" autocomplete="on">
+            </div>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="weight" placeholder="Weight" value="{{meds.weight}}" type="number">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="medstat" placeholder="Currently on medication?" {%if meds.medstat == True%}checked {%endif%} type="checkbox"><label for="medstat"></label>
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="medication" placeholder="Medication" value="{{meds.medication}}" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="dosage" placeholder="Dosage" value="{{meds.dosage}}" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="datestart" placeholder="Start date of treatment" value="{{meds.datestart}}" type="date">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="dateend" placeholder="End date of treatment" value="{{meds.dateend}}" type="date">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="notes" placeholder="Notes" value="{{meds.notes}}" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="id">
+                <input type="hidden" value="{{ meds.id }}" name="editmed">
+                <button class="button" type="submit">Edit</button></div></form>
+        </td>
+        <td>
+            <div class="id">
+                <form action="/deletemed" method="Post" class="formt">
+                <input type="hidden" value="{{ meds.id }}" name="delete">
+                <button class="button" onclick="return confirm('Are you sure you want to delete this item')" type="submit">Delete</button></div></form>
+        </td>   
+    </tr>  
+    {% endif %}
+    {% endfor %}
+    <tr>
+        <form action="/addmedical" method="Post" class="formt">
+        <td >
+            <div class="form-pet">
+                <input class="control-pet" name="dateentry" placeholder="Date of entry" type="date">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="weight" placeholder="Weight"  type="number">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="medstat" placeholder="On medication" type="checkbox">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="medication" placeholder="Medication" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="dosage" placeholder="Dosage" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="datestart" placeholder="Start date of treatment" type="date">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="dateend" placeholder="End date of treatment" type="date">
+            </div>
+        </td>
+        <td>
+            <div class="form-pet">
+                <input class="control-pet" name="notes" placeholder="Notes" type="text">
+            </div>
+        </td>
+        <td>
+            <div class="id">
+                <input type="hidden" value="{{ rows.id }}" name="edit2">
+            <button class="button" type="submit">Add</button>
+            </div>
+        </td>
+    </tr>
+</form>
+</table>
+<br>
+
+{% endfor %}
+{% endblock %}

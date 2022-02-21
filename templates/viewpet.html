@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}View pet
+{% endblock %}
+
+{% block main %}
+<p>{% if error %}
+{{ error }}
+{% endif %}
+{% if success %}
+{{ success }}
+{% endif %}</p>
+<h1>View pet entry</h1>
+{% for cols in pet %}
+
+<p>{%if cols.pic %}<img src={{cols.picpath}}{{cols.pic}} width="360px">
+    {% else %}
+    <div class="overlay-c">
+        <img src="/static/stock/nopic.jpg"  width="360px" class="center">
+        <div class="overlayt">No photo uploaded</div>
+      </div>
+    {% endif %}</p>
+<h1>{{cols.name}}</h1>
+<h2>{{ cols.pet }}</h2>
+{%if cols.vet != "" %}
+<h3>Registered at: </h3> <p>{{ cols.vet }}</p>
+<h3>Contact number: </h3> <p>{{ cols.vet_num }}</p>{%endif%}
+<table class="master" width>
+    <tr>
+     
+        <th width="20%">Species: </th>
+        <td>{{ cols.species }}</td>
+    <tr>
+        <th>Sex: </th>
+        <td>{{ cols.sex }}</td>
+    </tr>
+        <tr>
+        <th>Identifying traits</th>
+        <td>{{ cols.traits }}</td>
+    </tr>
+    <tr>
+        <th>Food</th>
+        <td>{{cols.food }}</td>
+    </tr>
+    <tr>
+        <th>Feeding Schedule</th>
+        <td>{{cols.feed_freq}}</td>
+    </tr>
+</table>
+{%endfor%}
+<h2>Medical history</h2>
+
+
+<table class="med">
+        <tr style="border-bottom: 1px solid black">
+        <th style="width:10%">Entry date</th>
+        <th style="width:10%">Weight</th>
+        <th style="width:10%">Medication</th>
+        <th style="width:10%">Dosage</th>
+        <th style="width:10%">Start date</th>
+        <th style="width:10%">End date</th>
+        <th>Notes: </th>
+    </tr>
+    {%for meds in med%}
+    <tr>
+        <td>{{meds.dateentry}}</td>
+        <td>{{meds.weight}}</td>
+        <td>{{meds.medication}}</td>
+        <td>{{meds.dosage}}</td>
+        <td>{{meds.datestart}}</td>
+        <td>{{meds.dateend}}</td>
+        <td>{{meds.notes}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+{% endblock %}
