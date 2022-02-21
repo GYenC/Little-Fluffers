@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome!
+{% endblock %}
+
+{% block main %}
+
+<p>{% if success %}
+{{ success }}
+{% endif %}
+</p>
+<h1>Overview</h1>
+
+<table class="master">
+    <tr>
+        <th>Pet name</th>
+        <th>Species</th>
+        <th colspan="3" style="text-align:center;">Action</th>
+    </tr>
+    {% for rows in pet %}
+    <tr>
+        <td>{{rows.name}}</td>
+        <td>{{rows.species}}</td>
+        
+        
+        <form action="/view" method="post"><input type="hidden" value="{{ rows.id }}" name="view"><td style="text-align:center;">
+        <button class="button" name="view" type="submit">View</button></td></form>
+
+        <form action="/edit" method="post"><input type="hidden" value="{{ rows.id }}" name="edit"><td style="text-align:center;">
+        <button name="edit" class="button" type="submit">Edit</button></td></form>
+        
+        <form action="/delete" method="post"><input type="hidden" value="{{ rows.id }}" name="delete"><td style="text-align:center;">
+        <button name="delete"  class = "button" onclick="return confirm('Are you sure you want to delete this item')" type="submit">Delete</button></td></form>
+    </tr>
+    {% endfor %}
+    
+
+
+{% endblock %}

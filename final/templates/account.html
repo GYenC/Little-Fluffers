@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}Account management
+{% endblock %}
+
+{% block main %}
+<p>{% if error %}
+{{ error }}
+{% endif %}</p>
+
+<table class="account">"
+    <tr><form action="/account" method="Post">
+        <td width="30%">
+            Email address:
+        </td>
+        <td>
+            <div class="form-pet">
+                <input autocomplete="off" class="control-pet" name="email" placeholder="{{info.email}}" type="text" value = "{{info.email}}">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Password: 
+        </td>
+        <td>
+            <div class="form-pet">
+                <input autocomplete="off" class="control-pet" name="password" placeholder="Password" type="password" value = "Password">
+            </div>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Confirm password: 
+        </td>
+        <td>
+            <div class="form-group">
+                <input autocomplete="off" class="control-pet" name="confirm" placeholder="Confirm password" type="password">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center">
+            <button class="button" type="submit">Update</button>
+        </td>
+    </tr>
+
+
+</form>
+    </table>
+
+
+
+{% endblock %}

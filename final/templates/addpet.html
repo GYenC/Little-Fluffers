@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block title %}Add a pet
+{% endblock %}
+
+{% block main %}
+<p>{% if error %}
+{{ error }}
+{% endif %}
+{% if success %}
+{{ success }}
+{% endif %}</p>
+<h1>Add a pet</h1>
+<p><span style="color:red">*</span> denotes required field</p>
+<table class="master">
+<form action="/addpet" method="Post">
+    
+        <tr>
+            <th>Pet name <span style="color:red">*</span> </th>
+            <td><div class="form-pet">
+                <input autocomplete="off" autofocus autocomplete="off" class="control-pet" name="name" placeholder="Pet name" type="text">
+            </div></td>
+            
+        </tr>
+        <tr>
+            <th>Species <span style="color:red">*</span> </th>
+            <td><div class="form-pet">
+                <input class="control-pet" autocomplete="off" name="species" placeholder="Species" type="text" >
+            </div></td>
+        </tr>
+        <tr>
+            <th>Sex</th>
+            <td><div class="form-pet">
+                <input class="control-pet" autocomplete="off" name="sex" placeholder="Sex" type="text" >
+            </div></td>
+        </tr>
+        <tr>
+            <th>Birthdate: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" autocomplete="off" name="birthdate" placeholder="Date of birth" type="date">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Unique traits <span style="color:red">*</span></th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" autocomplete="off" name="traits" placeholder="Unique identifying traits" type="text">
+                </div>    
+            </td>
+        </tr>
+        <tr>
+            <th>Food <span style="color:red">*</span></th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" autocomplete="off" name="food" placeholder="Food" type="text">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Feeding frequency <span style="color:red">*</span></th>
+            <td>
+                <select id="feed_freq" name="feed_freq">
+                    <option value="Daily">Daily</option>
+                    <option value="Every week">Every week</option>
+                    <option value="Every 2 weeks">Every 2 weeks</option>
+                    <option value="Every 3 week">Every 3 weeks</option>
+                    <option value="Every 4 weeks">Every 4 weeks</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Vet: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="vet" placeholder="Vet practice" type="text">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Vet contact number: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="vet_num" placeholder="Phone number for vet" type="text">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Environment parameters: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="env" placeholder="Environment parameters" type="text">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Notes: </th>
+            <td>
+                <div class="form-pet">
+                    <input class="control-pet" name="notes" placeholder="Notes" type="text">
+                </div>
+            </td>
+        </tr>
+        
+   
+        <tr> <td colspan="2" style="text-align: center;">               
+            <button class="button" type="submit">Add entry</button>
+                </div></td>
+        </tr>
+    
+  </form>
+
+</table>
+
+{% endblock %}

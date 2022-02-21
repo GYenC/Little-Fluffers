@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block main %}
+<p>{% if error %}
+{{ error }}
+{% endif %}</p>
+<h1>Register</h1>
+    <form action="/register" method="post">
+    <table class="formt">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Enter email" type="text">
+                </div>
+            </td>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input class="form-control" name="password" placeholder="Password" type="password">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input class="form-control" name="confirm" placeholder="Confirm password" type="password">
+                </div>
+            </td>
+        </tr>        
+        <tr>
+            <td style="text-align:center;">
+                <button class="button" type="submit">Register</button>
+            </td>
+        </tr>
+    </form>
+
+{% endblock %}

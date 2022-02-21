@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+   <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- info icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link href="/static/styles.css" rel="stylesheet">
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   
+    <title>Little Fluffers - {% block title %}{% endblock%}</title>
+</head>
+
+<body>
+    <!--NAVBAR-->
+<nav class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><b>Little Fluffers</b></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/home">Overview</a></li>
+        <li><a href="/addpet">Add a pet</a></li>
+        <li><a href="/edit">Manage pets</a></li>
+        <li><a href="/share">Share</a></li>
+        <li><a href="/guest">Guest</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {%if session["user_id"]%}
+        <li><a href="/account">Account</a></li>
+        <li><a href="/logout">Logout</a></li>
+        {%else%}
+        <li><a href="/register">Sign Up</a></li>
+        <li><a href="/login">Login</a></li>
+        {%endif%}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function deletep() {
+    confirm("Are you sure you want to delete this entry?");
+  }
+  </script>
+    {% block main %}{% endblock %}
+
+    
+</body>
+
+</html>
